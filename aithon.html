@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Campus Assistant</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f1f1f1;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .chat-container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .messages {
+      height: 300px;
+      overflow-y: scroll;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: #fafafa;
+    }
+    .message {
+      margin-bottom: 10px;
+    }
+    .user {
+      text-align: right;
+      color: #2980b9;
+    }
+    .bot {
+      text-align: left;
+      color: #27ae60;
+    }
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #2980b9;
+      color: white;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Smart Campus Assistant</h1>
+    <p>Ask me about schedules, dining, facilities, library services, and more!</p>
+  </header>
+
+  <div class="chat-container">
+    <div class="messages" id="chatBox">
+      <div class="message bot">Hi! I'm your campus assistant. How can I help you today?</div>
+    </div>
+    <input type="text" id="userInput" placeholder="Type your question..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const chatBox = document.getElementById('chatBox');
+      const userMessage = input.value.trim();
+
+      if (userMessage === "") return;
+
+      // Add user's message to chat
+      const userDiv = document.createElement('div');
+      userDiv.className = 'message user';
+      userDiv.innerText = userMessage;
+      chatBox.appendChild(userDiv);
+
+      // Simulated bot response
+      const botDiv = document.createElement('div');
+      botDiv.className = 'message bot';
+      botDiv.innerText = getBotResponse(userMessage); // You can later replace this with real AI backend call
+      chatBox.appendChild(botDiv);
+
+      // Scroll to bottom
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      // Clear input
+      input.value = '';
+    }
+
+    function getBotResponse(message) {
+      // Placeholder logic, replace with actual AI response logic/API call
+      if (message.toLowerCase().includes("library")) {
+        return "The library is open from 8 AM to 10 PM daily.";
+      } else if (message.toLowerCase().includes("dining")) {
+        return "Dining halls are open from 7 AM to 9 PM. You can check the menu on the dining portal.";
+      } else if (message.toLowerCase().includes("schedule")) {
+        return "Please login to your student portal to view your class schedule.";
+      } else {
+        return "Sorry, I don't have an answer for that yet. Try asking about schedules, dining, or the library!";
+      }
+    }
+  </script>
+
+</body>
+</html>
